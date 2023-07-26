@@ -15,7 +15,9 @@ module HTMLAttributesUtils
     %i(aria describedby),
     %i(aria flowto),
     %i(aria labelledby),
+    %i(data action),
     %i(data aria_controls),
+    %i(data controller),
     %i(aria owns),
     %i(rel),
   ].freeze
