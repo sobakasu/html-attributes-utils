@@ -31,8 +31,8 @@ module HTMLAttributesUtils
     #   merged, *don't supply this unless the method is called during recursion*
     # @mergeable_attributes [Array<Array<Symbol>>] Mergeable attributes are
     #   HTML attributes can contain lists made from space-separated strings. We
-    #   convert them to arrays so they can be cleanly merged. Rails accepts them
-    #   as arrays so there's no need to convert back to strings.
+    #   convert them to arrays so they can be cleanly merged. Use #deep_tidy_html_attributes
+    #   to convert back to strings.
     #
     # @example
     #   original = { class: "red", data: { size: "medium", controller: "comment" } }
@@ -60,6 +60,7 @@ module HTMLAttributesUtils
     # Remove unwanted attributes from a the hash and any values that are hashes
     # recursively. In particular we don't care for empty hashes, arrays,
     # strings that are empty or just contain spaces and nils.
+    # Converts attribute array values to strings.
     #
     # It preserves +true+ and +false+.
     #
@@ -102,7 +103,7 @@ module HTMLAttributesUtils
     def tidy_array(array)
       return nil if array.empty?
 
-      array.map { |v| tidy_value(v) }.compact
+      array.map { |v| tidy_value(v) }.compact.join(" ")
     end
 
     def tidy_remaining(value)

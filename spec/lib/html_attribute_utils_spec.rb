@@ -200,12 +200,12 @@ tidyable_example_groups = {
     HTMLTidyableAttributesExample.new(
       description: "arrays with empty values are removed",
       input: { a: [[], "one", nil, "two", "", {}] },
-      expected: { a: %w(one two) }
+      expected: { a: "one two" }
     ),
     HTMLTidyableAttributesExample.new(
       description: "non-empty but blank strings are removed",
       input: { a: "b", c: " ", d: "   ", e: ["f", " "], h: { i: " ", j: "k" } },
-      expected: { a: "b", e: %w(f), h: { j: "k" } }
+      expected: { a: "b", e: "f", h: { j: "k" } }
     ),
   ],
   "trimming whitespace from values" => [
@@ -217,14 +217,14 @@ tidyable_example_groups = {
     HTMLTidyableAttributesExample.new(
       description: "leading and trailing spaces are removed from nested arrays",
       input: { a: [" b", "c "] },
-      expected: { a: %w(b c) }
+      expected: { a: "b c" }
     ),
   ],
   "converting non-strings" => [
     HTMLTidyableAttributesExample.new(
       description: "non-strings are converted",
       input: { a: 1, b: :c, d: [:e, 2], f: 4.0, g: true, h: false },
-      expected: { a: "1", b: "c", d: %w(e 2), f: "4.0", g: true, h: false }
+      expected: { a: "1", b: "c", d: "e 2", f: "4.0", g: true, h: false }
     ),
   ],
 }
